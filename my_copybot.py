@@ -6,8 +6,9 @@ import pytz
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 import io
 import aiohttp
-import os
-import asyncio
+
+
+from http_srv import api
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -156,10 +157,10 @@ async def setup_rules_error(interaction: discord.Interaction, error: app_command
     else:
         await interaction.response.send_message(f"An error occurred: {error}", ephemeral=True)
 
-async def main():
-    print("Starting")
-    async with bot:
-        await bot.start(os.environ["BOT_TOKEN"])
+#async def bot_main():
+#    print("Starting")
+#    async with bot:
+#        await bot.start(os.environ["BOT_TOKEN"])
 
 class AttendanceView(discord.ui.View):
     def __init__(self, event_date):
@@ -418,6 +419,3 @@ async def daily_report(interaction: discord.Interaction, date: str = None):
     else:
         await interaction.response.send_message(f"No attendance records found for {date}.")
 
-if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(main())
