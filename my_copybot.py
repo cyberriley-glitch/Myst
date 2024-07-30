@@ -7,6 +7,7 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 import io
 import aiohttp
 import os
+import asyncio
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -156,6 +157,7 @@ async def setup_rules_error(interaction: discord.Interaction, error: app_command
         await interaction.response.send_message(f"An error occurred: {error}", ephemeral=True)
 
 async def main():
+    print("Starting")
     async with bot:
         await bot.start(os.environ["BOT_TOKEN"])
 
@@ -415,3 +417,7 @@ async def daily_report(interaction: discord.Interaction, date: str = None):
         await interaction.response.send_message(embed=embed)
     else:
         await interaction.response.send_message(f"No attendance records found for {date}.")
+
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
