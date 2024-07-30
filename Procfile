@@ -1,1 +1,1 @@
-web: python3 m<_copybot.py
+web: python3 my_copybot.py
