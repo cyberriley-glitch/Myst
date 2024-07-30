@@ -6,6 +6,7 @@ import pytz
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 import io
 import aiohttp
+import os
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -156,7 +157,7 @@ async def setup_rules_error(interaction: discord.Interaction, error: app_command
 
 async def main():
     async with bot:
-        await bot.start('Token')
+        await bot.start(os.environ["BOT_TOKEN"])
 
 class AttendanceView(discord.ui.View):
     def __init__(self, event_date):
@@ -414,5 +415,3 @@ async def daily_report(interaction: discord.Interaction, date: str = None):
         await interaction.response.send_message(embed=embed)
     else:
         await interaction.response.send_message(f"No attendance records found for {date}.")
-
-# os.environ['Token']
