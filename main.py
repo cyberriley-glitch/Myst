@@ -8,6 +8,7 @@ async def http_app():
     api.run(host='0.0.0.0', port=port)
 
 async def bot_app():
+    print("Starting bot")
     await bot.start(os.environ["BOT_TOKEN"]),
 
 
