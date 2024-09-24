@@ -25,8 +25,8 @@ roles = ['Bartender', 'Manager', 'Courtesan', 'Gambler', 'Security', 'Photograph
 
 timezone = pytz.timezone('Europe/Berlin')
 
-ATTENDANCE_START_HOUR = 9
-ATTENDANCE_END_HOUR = 22
+ATTENDANCE_START_HOUR = 19
+ATTENDANCE_END_HOUR = 0
 
 class Bot(commands.Bot):
     def __init__(self):
@@ -98,12 +98,48 @@ class AcceptRules(discord.ui.View):
             
             # Send the message with the GIF
             await getrolled_channel.send(content=custom_message, file=gif_file)
+    
+    @discord.ui.button(label="Apply to Work", style=discord.ButtonStyle.blurple, custom_id="apply_to_work", emoji="💼")
+    async def apply_to_work(self, interaction: discord.Interaction, button: discord.ui.Button):
+        applicant_role = discord.utils.get(interaction.guild.roles, name="Applicant")
+        if not applicant_role:
+            applicant_role = await interaction.guild.create_role(name="Applicant")
+
+        if applicant_role in interaction.user.roles:
+            await interaction.response.send_message("You're already an applicant!", ephemeral=True)
+        else:
+            await interaction.user.add_roles(applicant_role)
+            await interaction.response.send_message("Thank you for your interest in working with us! You've been given the Applicant role.", ephemeral=True)
+    
+    @discord.ui.button(label="NSFW", style=discord.ButtonStyle.red, custom_id="nsfw", emoji="😈")
+    async def nsfw(self, interaction: discord.Interaction, button: discord.ui.Button):
+        nfsw_role = discord.utils.get(interaction.guild.roles, name="NSFW")
+        if not nfsw_role:
+            nfsw_role = await interaction.guild.create_role(name="NSFW")
+
+        if nfsw_role in interaction.user.roles:
+            await interaction.response.send_message("You are already naughty!", ephemeral=True)
+        else:
+            await interaction.user.add_roles(nfsw_role)
+            await interaction.response.send_message("Hehe you are a Naughty, little Bean aren't you?", ephemeral=True)
+
+    @discord.ui.button(label="Magic", style=discord.ButtonStyle.blurple, custom_id="magic", emoji="🌊")
+    async def Magic(self, interaction: discord.Interaction, button: discord.ui.Button):
+        magic_role = discord.utils.get(interaction.guild.roles, name="Magic")
+        if not magic_role:
+            magic_role = await interaction.guild.create_role(name="Magic")
+
+        if magic_role in interaction.user.roles:
+            await interaction.response.send_message("You already have the magic in you!", ephemeral=True)
+        else:
+            await interaction.user.add_roles(magic_role)
+            await interaction.response.send_message("Shh, don't tell let this be our Secret!", ephemeral=True)
 
 @bot.tree.command(name="setup_rules", description="Set up the rules channel with standard Discord rules")
 @app_commands.checks.has_permissions(administrator=True)
 async def setup_rules(interaction: discord.Interaction):
     # Check if a 'rules' channel already exists
-    rules_channel = discord.utils.get(interaction.guild.text_channels, name='rules')
+    rules_channel = discord.utils.get(interaction.guild.text_channels, name='📜-𝓇𝓊𝓁𝑒𝓈')
     
     if not rules_channel:
         # Create a new 'rules' channel if it doesn't exist
@@ -153,11 +189,6 @@ async def setup_rules_error(interaction: discord.Interaction, error: app_command
         await interaction.response.send_message("You need administrator permissions to use this command.", ephemeral=True)
     else:
         await interaction.response.send_message(f"An error occurred: {error}", ephemeral=True)
-
-#async def bot_main():
-#    print("Starting")
-#    async with bot:
-#        await bot.start(os.environ["BOT_TOKEN"])
 
 class AttendanceView(discord.ui.View):
     def __init__(self, event_date):
@@ -415,4 +446,3 @@ async def daily_report(interaction: discord.Interaction, date: str = None):
         await interaction.response.send_message(embed=embed)
     else:
         await interaction.response.send_message(f"No attendance records found for {date}.")
-
