@@ -5,9 +5,9 @@ After=network.target
 [Service]
 #Type=idle
 Restart=on-failure
-User=root
-ExecStart=/usr/bin/python3 /root/Myst/main.py
-WorkingDirectory=/root/Myst
+User=discord
+ExecStart=/usr/bin/python3 /home/discord/Myst/main.py
+WorkingDirectory=/home/discord/Myst
 
 [Install]
 WantedBy=multi-user.target

@@ -19,6 +19,4 @@ jobs:
           script: |
             cd Myst
             git pull
-            cp discord-bot.service /etc/systemd/system/discord-bot.service
-            systemctl daemon-reload
             systemctl restart discord-bot
