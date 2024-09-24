@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: executing remote ssh commands using password
+      - name: Update Source Code
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.HOST }}
@@ -19,4 +19,13 @@ jobs:
           script: |
             cd Myst
             git pull
+            
+            
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: root
+          key: ${{ secrets.PRIVKEY }}
+          script: |
             systemctl restart discord-bot
