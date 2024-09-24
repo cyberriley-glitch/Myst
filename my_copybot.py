@@ -86,9 +86,9 @@ class AcceptRules(discord.ui.View):
             await interaction.response.send_message("You've chosen not to accept the rules. You've been given the Naughty role.", ephemeral=True)
             
             # Find or create the #getrolled channel
-            getrolled_channel = discord.utils.get(interaction.guild.text_channels, name='getrolled')
+            getrolled_channel = discord.utils.get(interaction.guild.text_channels, name='🎲-𝑔𝑒𝓉𝓇𝑜𝓁𝓁𝑒𝒹')
             if not getrolled_channel:
-                getrolled_channel = await interaction.guild.create_text_channel('getrolled')
+                getrolled_channel = await interaction.guild.create_text_channel('🎲-𝑔𝑒𝓉𝓇𝑜𝓁𝓁𝑒𝒹')
             
             # Ping the user with a custom message and GIF
             custom_message = f"Hey {interaction.user.mention}! You've been rolled for not accepting the rules. Enjoy your stay in the naughty corner! 🎭 To get out, just ping the bot."
@@ -147,7 +147,7 @@ async def setup_rules(interaction: discord.Interaction):
             interaction.guild.default_role: discord.PermissionOverwrite(send_messages=False),
             interaction.guild.me: discord.PermissionOverwrite(send_messages=True)
         }
-        rules_channel = await interaction.guild.create_text_channel('rules', overwrites=overwrites)
+        rules_channel = await interaction.guild.create_text_channel('📜-𝓇𝓊𝓁𝑒𝓈', overwrites=overwrites)
     
     # Create the embed for rules
     embed = discord.Embed(
@@ -347,7 +347,7 @@ async def on_ready():
 
 @bot.event
 async def on_member_join(member):
-    welcome_channel = discord.utils.get(member.guild.channels, name='welcome')
+    welcome_channel = discord.utils.get(member.guild.channels, name='🐠-𝓌𝑒𝓁𝒸𝑜𝓂𝑒')
     if welcome_channel:
         embed = discord.Embed(
             title=f"Welcome to the server, {member.display_name}!",
