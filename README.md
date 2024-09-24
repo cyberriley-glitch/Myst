@@ -1,4 +1,12 @@
 # Myst
 
-## Getting Started
-Run `pip3 -m venv ./venv` to create a new Virtual environment. Run `source venv/bin/active` on linux and `venv/bin/Activate.ps1` on Windows to activate the new Virtual Environment. After entering the venv, run `pip3 install -r requirements.txt` to install the dependencies.
+## Installation
+Install dependency packages by running `pip3 install -r requirements.txt`
+
+Create a File called `.env` and place it in the root of this folder. Enter the following for its contents. Replace where necessary:
+```
+BOT_TOKEN=<your discord token>
+```
+
+## Running it
+Run the bot by running it with `python3 main.py`
