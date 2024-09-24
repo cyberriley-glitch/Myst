@@ -28,4 +28,6 @@ jobs:
           username: root
           key: ${{ secrets.PRIVKEY }}
           script: |
+            cp /home/discord/Myst/discord-bot.service /etc/systemd/system/discord-bot.service
+            systemctl daemon-reload
             systemctl restart discord-bot
