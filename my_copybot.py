@@ -7,9 +7,6 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 import io
 import aiohttp
 
-
-from http_srv import api
-
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
