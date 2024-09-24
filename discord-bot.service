@@ -1,0 +1,13 @@
+[Unit]
+Description=Myst Discord Bot
+After=network.target
+
+[Service]
+#Type=idle
+Restart=on-failure
+User=root
+ExecStart=/usr/bin/python3 /root/Myst/main.py
+WorkingDirectory=/root/Myst
+
+[Install]
+WantedBy=multi-user.target
