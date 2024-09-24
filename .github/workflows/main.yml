@@ -10,15 +10,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      #- name: executing remote ssh commands using password
-      #  uses: appleboy/ssh-action@v1.0.3
-      #  with:
-      #    host: ${{ secrets.HOST }}
-      #    username: ${{ secrets.USERNAME }}
-      #    key: ${{ secrets.PRIVKEY }}
-      #    script: |
-      #      cd Myst
-      #      git pull
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVKEY }}
+          script: |
+            cd Myst
+            git pull
+            systemctl restart discord-bot
 
 
       #- name: copy file via ssh password
